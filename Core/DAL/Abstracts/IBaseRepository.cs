@@ -15,7 +15,7 @@ namespace Core.DAL.Abstracts
 
         IEnumerable<TDto> ListProject<TEntity, TDto>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
 
-
+        List<T> ListFromSql<T>(string sql);
 
        void Add<TEntity>(TEntity entity) where TEntity : BaseEntity, new();
         void SaveAll();

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using Core.DAL.Abstracts;
 using Core.Model.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Core.DAL.Concretes
 {
@@ -10,6 +13,7 @@ namespace Core.DAL.Concretes
     {
         private readonly DbContext _contex;
         private readonly IMapper _mapper;
+        protected string _conStr;
         public BaseRepository(DbContext context, IMapper mapper)
         {
             _contex = context;
@@ -24,7 +28,7 @@ namespace Core.DAL.Concretes
 
             return _contex.Set<TEntity>().Where(filter);
         }
-        public IEnumerable<TDto> ListProject<TEntity,TDto>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new()
+        public IEnumerable<TDto> ListProject<TEntity, TDto>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new()
         {
 
             IQueryable<TEntity> query = _contex.Set<TEntity>();
@@ -78,6 +82,95 @@ namespace Core.DAL.Concretes
             _contex.SaveChanges();
         }
 
+
+        public List<T> ListFromSql<T>(string sql)
+        {
+            var list = new List<T>();
+
+            using (SqlConnection con = new SqlConnection(_conStr))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+
+                        DataTable dt = new DataTable();
+                        //dt.Load(cmd.ExecuteReader());
+                        //using (SqlDataReader reader = cmd.ExecuteReader())
+                        //{
+                        //    dt.Load(reader);
+                        //}
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                        list = DataTableMapToList<T>(dt);
+
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+
+
+                }
+
+            }
+
+
+            return list;
+
+        }
+
+        public List<T> DataTableMapToList<T>(DataTable dt)
+        {
+            var list = new List<T>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                list.Add(GetItem<T>(dt.Rows[i]));
+            }
+            return list;
+        }
+
+        public T GetItem<T>(DataRow dr)
+        {
+            Type temp = typeof(T);
+            T obj = Activator.CreateInstance<T>();
+
+            for (int i = 0; i < dr.Table.Columns.Count; i++)
+            {
+                foreach (PropertyInfo prop in temp.GetProperties())
+                {
+                    try
+                    {
+                        if (prop.Name == dr.Table.Columns[i].ColumnName && !object.Equals(dr[dr.Table.Columns[i].ColumnName], DBNull.Value))
+                        {
+                            prop.SetValue(obj, dr[dr.Table.Columns[i].ColumnName], null);
+                        }
+                        else
+                            continue;
+
+
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+
+            }
+
+            return obj;
+        }
 
 
     }
