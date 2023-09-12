@@ -11,6 +11,7 @@ namespace IIB.PBS.DAL.Contexts
     public class PBSContext : DbContext
     {
         public PBSContext(DbContextOptions<PBSContext> options) : base(options) { 
+
         }
 
         public DbSet<Personel> Personel { get; set; }

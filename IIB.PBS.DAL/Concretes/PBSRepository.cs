@@ -32,6 +32,13 @@ namespace IIB.PBS.DAL.Concretes
             _contex.Set<TEntity>().Add(entity);
             
         }
+        public void AddRange<TEntity>(TEntity[] entityList) where TEntity : BaseEntity, new()
+        {
+            _contex.Set<TEntity>().AddRange(entityList);
+
+        }
+
+
         public void Update<TEntity>(TEntity entity) where TEntity : BaseEntity, new()
         {
             var data =_contex.Set<TEntity>().SingleOrDefault(d => d.Id == entity.Id);
@@ -43,6 +50,19 @@ namespace IIB.PBS.DAL.Concretes
             _contex.Set<TEntity>().Update(entity);
 
         }
+
+        public void Delete<TEntity>(TEntity entity) where TEntity : BaseEntity, new()
+        {
+            var data = _contex.Set<TEntity>().SingleOrDefault(d => d.Id == entity.Id);
+
+            if (data == null)
+                return;
+
+
+            _contex.Set<TEntity>().Remove(entity);
+
+        }
+
 
         public void SaveAll()
         {

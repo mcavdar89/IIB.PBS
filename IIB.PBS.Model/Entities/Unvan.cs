@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace IIB.PBS.Model.Entities
 {
-    public abstract class BaseEntity
+    public class Unvan : BaseEntity
     {
-
         [Key]
-        public object Id { get; set; }
+        public short Id { get; set; }
+        public string Ad { get; set; }
+        public string Aciklama { get; set; }
+
+        public List<Personel> Personel { get; set; }
+
     }
 }

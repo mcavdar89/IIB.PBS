@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IIB.PBS.Model.Entities
+namespace IIB.PBS.Model.Dtos
 {
-    public abstract class BaseEntity
+    public abstract class BaseDto
     {
-
-        [Key]
         public object Id { get; set; }
     }
 }
