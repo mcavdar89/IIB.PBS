@@ -17,7 +17,8 @@ namespace IIB.PBS.API.Controllers
         [HttpGet("get/{isim?}")]
         public IActionResult Get(string? isim)
         {
-            return Ok(_personelServis.List(isim));
+            var list = _personelServis.List(isim);
+            return Ok(list);
 
 
             //return Ok("Personel controllerı");

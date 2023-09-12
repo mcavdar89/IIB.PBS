@@ -1,4 +1,5 @@
-﻿using IIB.PBS.Model.Entities;
+﻿using IIB.PBS.Model.Dtos;
+using IIB.PBS.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace IIB.PBS.BL.Abstracts
 {
     public interface IPersonelServis
     {
-        IEnumerable<Personel> List(string isim);
+        IEnumerable<PersonelDto> List(string isim);
         
     }
 }

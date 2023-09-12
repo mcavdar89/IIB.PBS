@@ -4,6 +4,7 @@ using IIB.PBS.BL.Concretes;
 using IIB.PBS.DAL.Abstracts;
 using IIB.PBS.DAL.Concretes;
 using IIB.PBS.DAL.Contexts;
+using IIB.PBS.Model.Profiles;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<PBSContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("PBSConnection"));
 });
+
+builder.Services.AddAutoMapper(typeof(PBSProfile));
 
 
 #endregion

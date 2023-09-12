@@ -1,4 +1,5 @@
-﻿using IIB.PBS.Model.Entities;
+﻿using Core.DAL.Abstracts;
+using IIB.PBS.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace IIB.PBS.DAL.Abstracts
 {
-    public interface IPBSRepository
+    public interface IPBSRepository :IBaseRepository
     {
-        IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
-
-        void Add<TEntity>(TEntity entity) where TEntity : BaseEntity, new();
-        void SaveAll();
+       
     }
 }

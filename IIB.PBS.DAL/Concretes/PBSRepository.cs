@@ -1,4 +1,6 @@
-﻿using IIB.PBS.DAL.Abstracts;
+﻿using AutoMapper;
+using Core.DAL.Concretes;
+using IIB.PBS.DAL.Abstracts;
 using IIB.PBS.DAL.Contexts;
 using IIB.PBS.Model.Entities;
 using System;
@@ -10,66 +12,16 @@ using System.Threading.Tasks;
 
 namespace IIB.PBS.DAL.Concretes
 {
-    public class PBSRepository : IPBSRepository
+    public class PBSRepository : BaseRepository, IPBSRepository
     {
         private readonly PBSContext _contex;
-        public PBSRepository(PBSContext context)
+        private readonly IMapper _mapper;
+        public PBSRepository(PBSContext context, IMapper mapper):base(context,mapper)
         {
-                _contex = context;
+            _contex = context;
+            _mapper = mapper;
         }
-        public IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity , new()
-        {
-            if(filter == null)
-            {
-                return _contex.Set<TEntity>();
-            }
-
-            return _contex.Set<TEntity>().Where(filter);
-        }
-
-        public void Add<TEntity>(TEntity entity) where TEntity : BaseEntity, new()
-        {
-            _contex.Set<TEntity>().Add(entity);
-            
-        }
-        public void AddRange<TEntity>(TEntity[] entityList) where TEntity : BaseEntity, new()
-        {
-            _contex.Set<TEntity>().AddRange(entityList);
-
-        }
-
-
-        public void Update<TEntity>(TEntity entity) where TEntity : BaseEntity, new()
-        {
-            var data =_contex.Set<TEntity>().SingleOrDefault(d => d.Id == entity.Id);
-
-            if (data == null)
-                return;
-
-
-            _contex.Set<TEntity>().Update(entity);
-
-        }
-
-        public void Delete<TEntity>(TEntity entity) where TEntity : BaseEntity, new()
-        {
-            var data = _contex.Set<TEntity>().SingleOrDefault(d => d.Id == entity.Id);
-
-            if (data == null)
-                return;
-
-
-            _contex.Set<TEntity>().Remove(entity);
-
-        }
-
-
-        public void SaveAll()
-        {
-            _contex.SaveChanges();
-        }
-
-
+       
 
     }
 }
