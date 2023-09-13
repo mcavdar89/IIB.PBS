@@ -19,6 +19,13 @@ namespace Core.DAL.Concretes
             _contex = context;
             _mapper = mapper;
         }
+        
+        public TEntity Get<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new()
+        {
+            return _contex.Set<TEntity>().SingleOrDefault(filter);         
+        }
+        
+        
         public IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new()
         {
             if (filter == null)

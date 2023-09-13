@@ -11,7 +11,9 @@ namespace Core.DAL.Abstracts
 {
     public interface IBaseRepository
     {
-        IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
+        TEntity Get<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
+
+       IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
 
         IEnumerable<TDto> ListProject<TEntity, TDto>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
 

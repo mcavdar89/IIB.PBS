@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 #region IOC 
 builder.Services.AddScoped<IPBSRepository,PBSRepository>();
 builder.Services.AddScoped<IPersonelServis,PersonelServis>();
+builder.Services.AddScoped<IAccountServis,AccountServis>();
 
 builder.Services.AddDbContext<PBSContext>(option =>
 {
