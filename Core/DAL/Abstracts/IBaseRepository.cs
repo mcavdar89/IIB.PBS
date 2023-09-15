@@ -20,6 +20,7 @@ namespace Core.DAL.Abstracts
         List<T> ListFromSql<T>(string sql);
 
        void Add<TEntity>(TEntity entity) where TEntity : BaseEntity, new();
+        void Update<TEntity>(TEntity entity) where TEntity : BaseEntity, new();
         void SaveAll();
     }
 }

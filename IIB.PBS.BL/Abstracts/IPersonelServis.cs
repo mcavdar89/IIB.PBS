@@ -11,6 +11,7 @@ namespace IIB.PBS.BL.Abstracts
     public interface IPersonelServis
     {
         IEnumerable<PersonelDto> List(string isim);
-        
+        PersonelDto Kaydet(PersonelDto personel);
+        PersonelDto Guncelle(PersonelDto personel);
     }
 }

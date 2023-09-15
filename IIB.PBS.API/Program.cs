@@ -13,6 +13,16 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
+
+
 #region IOC 
 builder.Services.AddScoped<IPBSRepository,PBSRepository>();
 builder.Services.AddScoped<IPersonelServis,PersonelServis>();
@@ -30,6 +40,10 @@ builder.Services.AddAutoMapper(typeof(PBSProfile));
 
 var app = builder.Build();
 //middleware ları yönettiğimiz yer
+
+
+app.UseCors("AllowOrigin");
+
 
 app.MapDefaultControllerRoute();
 

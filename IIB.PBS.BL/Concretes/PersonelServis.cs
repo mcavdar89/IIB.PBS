@@ -1,4 +1,5 @@
-﻿using IIB.PBS.BL.Abstracts;
+﻿using AutoMapper;
+using IIB.PBS.BL.Abstracts;
 using IIB.PBS.DAL.Abstracts;
 using IIB.PBS.Model.Dtos;
 using IIB.PBS.Model.Entities;
@@ -13,9 +14,11 @@ namespace IIB.PBS.BL.Concretes
     public class PersonelServis : IPersonelServis
     {
         private readonly IPBSRepository _repository;
-        public PersonelServis(IPBSRepository repository)
+        private readonly IMapper _mapper;
+        public PersonelServis(IPBSRepository repository,IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         public IEnumerable<PersonelDto> List(string isim)
         {
@@ -35,10 +38,21 @@ namespace IIB.PBS.BL.Concretes
         }
 
 
-        public void PersonelEkle(Personel personel)
+        public PersonelDto Guncelle(PersonelDto personel)
         {
-            _repository.Add(personel);
+            var data = _mapper.Map<Personel>(personel);
+            _repository.Update(data);
             _repository.SaveAll();
+            return _mapper.Map<PersonelDto>(data);
+        }
+
+
+        public PersonelDto Kaydet(PersonelDto personel)
+        {
+            var data = _mapper.Map<Personel>(personel);
+            _repository.Add(data);
+            _repository.SaveAll();
+            return _mapper.Map<PersonelDto>(data);
         }
 
 
