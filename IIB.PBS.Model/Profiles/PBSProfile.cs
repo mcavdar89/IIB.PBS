@@ -17,6 +17,7 @@ namespace IIB.PBS.Model.Profiles
                 .ForMember(dest => dest.UnvanAd, opt => opt.MapFrom(src => src.Unvan.Ad))
                 .ForMember(dest => dest.Isim, opt => opt.MapFrom(src => $"{src.Ad} {src.Soyad}"))
                 ;
+            CreateMap<PersonelDto, Personel>();
         }
     }
 }

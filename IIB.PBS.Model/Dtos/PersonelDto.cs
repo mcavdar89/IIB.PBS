@@ -12,10 +12,11 @@ namespace IIB.PBS.Model.Dtos
     {
         public int Id { get; set; }
         public short UnvanId { get; set; }
-        public string UnvanAd { get; set; }
-        public string Isim { get; set; }
+        public string? UnvanAd { get; set; }
+        public string? Isim { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
+        public string Tel { get; set; }
         public string? Aciklama { get; set; }
     }
 }

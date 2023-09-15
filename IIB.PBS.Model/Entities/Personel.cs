@@ -18,6 +18,7 @@ namespace IIB.PBS.Model.Entities
         public short UnvanId { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
+        public string Tel { get; set; }
         public string? Aciklama { get; set; }
 
 
