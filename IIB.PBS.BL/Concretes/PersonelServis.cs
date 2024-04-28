@@ -26,11 +26,11 @@ namespace IIB.PBS.BL.Concretes
 
             //list = list.Where(d => d.Ad.Contains(isim));
 
-            //var list = _repository.ListProject<Personel, PersonelDto>(d => d.Ad.Contains(isim));
+            var list = _repository.ListProject<Personel, PersonelDto>(d => d.Ad.Contains(isim));
 
-            var list = _repository.ListFromSql<PersonelDto>(@$"select p.*,u.Ad UnvanAd 
-                                                                  from Personel p
-                                                                  left join Unvan u on u.Id = p.UnvanId");
+            //var list = _repository.ListFromSql<PersonelDto>(@$"select p.*,u.Ad UnvanAd 
+            //                                                      from Personel p
+            //                                                      left join Unvan u on u.Id = p.UnvanId");
 
             return list;
 
