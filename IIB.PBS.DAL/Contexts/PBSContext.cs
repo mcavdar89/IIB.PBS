@@ -17,6 +17,7 @@ namespace IIB.PBS.DAL.Contexts
         public DbSet<Personel> Personel { get; set; }
         public DbSet<Unvan> Unvan { get; set; }
         public DbSet<Kullanici> Kullanici { get; set; }
+        public DbSet<Nufus> Nufus { get; set; }
 
     }
 }
