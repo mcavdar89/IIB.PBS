@@ -34,7 +34,7 @@ namespace IIB.PBS.API.Controllers
         [HttpGet("getnufus/{id}")]
         public IActionResult GetNufus(int id)
         {
-            var list = _personelServis.Get(id);
+            var list = _personelServis.GetNufus(id);
             return Ok(list);
             //return Ok("Personel controllerı");
         }
