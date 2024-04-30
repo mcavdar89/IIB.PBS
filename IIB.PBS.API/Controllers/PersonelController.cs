@@ -15,13 +15,23 @@ namespace IIB.PBS.API.Controllers
             _personelServis = personelServis;
         }
 
-        [HttpGet("get/{isim?}")]
-        public IActionResult Get(string? isim)
+        [HttpGet("list")]
+        public IActionResult List()
         {
-            var list = _personelServis.List(isim);
+            var list = _personelServis.List();
             return Ok(list);
             //return Ok("Personel controllerı");
         }
+
+        [HttpGet("get/{id}")]
+        public IActionResult Get(int id)
+        {
+            var list = _personelServis.Get(id);
+            return Ok(list);
+            //return Ok("Personel controllerı");
+        }
+
+
         [HttpPost("kaydet")]
         public IActionResult Kaydet([FromBody] PersonelDto personel)
         {

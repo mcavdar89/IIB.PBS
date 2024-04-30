@@ -24,8 +24,19 @@ namespace Core.DAL.Concretes
         {
             return _contex.Set<TEntity>().SingleOrDefault(filter);         
         }
-        
-        
+        public TDto GetProject<TEntity, TDto>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new()
+        {
+
+            IQueryable<TEntity> query = _contex.Set<TEntity>();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return _mapper.ProjectTo<TDto>(query).FirstOrDefault();
+        }
+
         public IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new()
         {
             if (filter == null)

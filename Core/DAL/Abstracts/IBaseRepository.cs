@@ -13,7 +13,9 @@ namespace Core.DAL.Abstracts
     {
         TEntity Get<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
 
-       IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
+        TDto GetProject<TEntity, TDto>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
+
+        IEnumerable<TEntity> List<TEntity>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
 
         IEnumerable<TDto> ListProject<TEntity, TDto>(Expression<Func<TEntity, bool>>? filter) where TEntity : BaseEntity, new();
 

@@ -20,7 +20,7 @@ namespace IIB.PBS.BL.Concretes
             _repository = repository;
             _mapper = mapper;
         }
-        public IEnumerable<PersonelDto> List(string isim)
+        public IEnumerable<PersonelDto> List()
         {
            //var list = _repository.List<Personel>(d=> d.Ad.Contains(isim));
 
@@ -36,7 +36,14 @@ namespace IIB.PBS.BL.Concretes
 
 
         }
+        public PersonelDto Get(int id)
+        {
+            var item = _repository.GetProject<Personel, PersonelDto>(d => d.Id == id);
 
+            return item;
+
+
+        }
 
         public PersonelDto Guncelle(PersonelDto personel)
         {
