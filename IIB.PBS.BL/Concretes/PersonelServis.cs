@@ -38,7 +38,24 @@ namespace IIB.PBS.BL.Concretes
         }
         public PersonelDto Get(int id)
         {
-            var item = _repository.GetProject<Personel, PersonelDto>(d => d.Id == id);
+            return _repository.GetProject<Personel, PersonelDto>(d => d.Id == id);
+        }
+
+
+        public Nufus KaydetNufus(Nufus item)
+        {
+            _repository.Add(item);
+            _repository.SaveAll();
+
+            return item;
+
+
+        }
+
+
+        public Nufus GetNufus(int id)
+        {
+            var item = _repository.Get<Nufus>(d => d.Id == id);
 
             return item;
 
@@ -62,7 +79,6 @@ namespace IIB.PBS.BL.Concretes
             return _mapper.Map<PersonelDto>(data);
         }
 
-
-
+     
     }
 }

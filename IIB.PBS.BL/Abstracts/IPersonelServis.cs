@@ -12,6 +12,8 @@ namespace IIB.PBS.BL.Abstracts
     {
         IEnumerable<PersonelDto> List();
         PersonelDto Get(int id);
+        Nufus GetNufus(int id);
+        Nufus KaydetNufus(Nufus item);
         PersonelDto Kaydet(PersonelDto personel);
         PersonelDto Guncelle(PersonelDto personel);
     }

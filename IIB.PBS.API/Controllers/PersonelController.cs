@@ -1,5 +1,6 @@
 ﻿using IIB.PBS.BL.Abstracts;
 using IIB.PBS.Model.Dtos;
+using IIB.PBS.Model.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,20 @@ namespace IIB.PBS.API.Controllers
             return Ok(list);
             //return Ok("Personel controllerı");
         }
-
+        [HttpGet("getnufus/{id}")]
+        public IActionResult GetNufus(int id)
+        {
+            var list = _personelServis.Get(id);
+            return Ok(list);
+            //return Ok("Personel controllerı");
+        }
+        [HttpPost("kaydetnufus")]
+        public IActionResult KaydetNufus(Nufus item)
+        {
+            var list = _personelServis.KaydetNufus(item);
+            return Ok(list);
+            //return Ok("Personel controllerı");
+        }
 
         [HttpPost("kaydet")]
         public IActionResult Kaydet([FromBody] PersonelDto personel)
