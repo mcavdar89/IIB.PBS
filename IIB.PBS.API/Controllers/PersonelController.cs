@@ -45,6 +45,13 @@ namespace IIB.PBS.API.Controllers
             return Ok(list);
             //return Ok("Personel controllerı");
         }
+        [HttpPost("guncellenufus")]
+        public IActionResult GuncelleNufus(Nufus item)
+        {
+            var list = _personelServis.KaydetNufus(item);
+            return Ok(list);
+            //return Ok("Personel controllerı");
+        }
 
         [HttpPost("kaydet")]
         public IActionResult Kaydet([FromBody] PersonelDto personel)

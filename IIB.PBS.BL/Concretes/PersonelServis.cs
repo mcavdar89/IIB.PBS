@@ -51,7 +51,23 @@ namespace IIB.PBS.BL.Concretes
 
 
         }
+        public Nufus GuncelleNufus(Nufus item)
+        {
+            var data = _repository.Get<Nufus>(d => d.Id == item.Id);
 
+            data.Ad = item.Ad;
+            data.Soyad = item.Soyad;
+            data.DogumTarihi = item.DogumTarihi;
+            data.Cinsiyet = item.Cinsiyet;
+            //data.TCKN = item.TCKN;
+
+            _repository.Update(data);
+            _repository.SaveAll();
+
+            return item;
+
+
+        }
 
         public Nufus GetNufus(int id)
         {
