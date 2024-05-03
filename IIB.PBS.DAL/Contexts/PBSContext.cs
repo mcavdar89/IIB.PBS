@@ -18,6 +18,9 @@ namespace IIB.PBS.DAL.Contexts
         public DbSet<Unvan> Unvan { get; set; }
         public DbSet<Kullanici> Kullanici { get; set; }
         public DbSet<Nufus> Nufus { get; set; }
+        public DbSet<Izin> Izin { get; set; }
+        public DbSet<IzinTip> IzinTip { get; set; }
+        
 
     }
 }
