@@ -17,6 +17,8 @@ namespace IIB.PBS.Model.Dtos
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public string Tel { get; set; }
+        public DateTime DogumTarihi { get; set; }
+        public string Cinsiyet { get; set; }
         public string? Aciklama { get; set; }
     }
 }
