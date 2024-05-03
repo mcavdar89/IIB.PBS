@@ -22,15 +22,16 @@ namespace IIB.PBS.BL.Concretes
         }
         public IEnumerable<PersonelDto> List()
         {
-           //var list = _repository.List<Personel>(d=> d.Ad.Contains(isim));
+            //var list = _repository.List<Personel>(d=> d.Ad.Contains(isim));
 
             //list = list.Where(d => d.Ad.Contains(isim));
 
-            var list = _repository.ListProject<Personel, PersonelDto>(d=>1==1);
+            //var list = _repository.ListProject<Personel, PersonelDto>(d=>1==1);
 
-            //var list = _repository.ListFromSql<PersonelDto>(@$"select p.*,u.Ad UnvanAd 
-            //                                                      from Personel p
-            //                                                      left join Unvan u on u.Id = p.UnvanId");
+            var list = _repository.ListFromSql<PersonelDto>(@$"select p.*,n.TCKN,                                                                   n.Ad,n.Soyad,n.Cinsiyet,n.DogumTarihi,u.Ad UnvanAd 
+                                                    from Personel p
+                                                    left join Nufus n on n.Id = p.Id
+                                                                left join Unvan u on u.Id = p.UnvanId");
 
             return list;
 
